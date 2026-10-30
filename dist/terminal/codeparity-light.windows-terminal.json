@@ -1,0 +1,23 @@
+{
+  "name": "Codeparity Light",
+  "background": "#f3f3f3",
+  "foreground": "#323232",
+  "cursorColor": "#0e7a73",
+  "selectionBackground": "#bcbcbc",
+  "black": "#323232",
+  "red": "#cc241d",
+  "green": "#8d8c18",
+  "yellow": "#b57614",
+  "blue": "#458588",
+  "purple": "#b16286",
+  "cyan": "#609462",
+  "white": "#979797",
+  "brightBlack": "#7a7a7a",
+  "brightRed": "#cc241d",
+  "brightGreen": "#727114",
+  "brightYellow": "#976311",
+  "brightBlue": "#3e7779",
+  "brightPurple": "#a65379",
+  "brightCyan": "#4e774f",
+  "brightWhite": "#fbfbfb"
+}

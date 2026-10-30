@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "name": "Codeparity",
+    "seed": "Gruvbox Dark (medium contrast)",
+    "generated_by": "src/gen_palette.py"
+  },
+  "dark": {
+    "bg0_h": "#1f1f1f",
+    "bg": "#282828",
+    "bg_soft": "#303030",
+    "bg1": "#393939",
+    "bg2": "#4a4a4a",
+    "bg3": "#5d5d5d",
+    "bg4": "#707070",
+    "fg0": "#e1e1e1",
+    "fg": "#cecece",
+    "fg2": "#bbbbbb",
+    "fg3": "#a8a8a8",
+    "fg4": "#969696",
+    "gray": "#838383",
+    "accent": {
+      "red": "#fb5744",
+      "green": "#b8bb26",
+      "yellow": "#fabd2f",
+      "blue": "#83a598",
+      "purple": "#d3869b",
+      "aqua": "#8ec07c",
+      "orange": "#fe8019",
+      "teal": "#2bb3a3"
+    },
+    "accent_dim": {
+      "red": "#e02d25",
+      "green": "#98971a",
+      "yellow": "#d79921",
+      "blue": "#458588",
+      "purple": "#b16286",
+      "aqua": "#689d6a",
+      "orange": "#d65d0e",
+      "teal": "#1f8a7d"
+    }
+  },
+  "light": {
+    "bg0_h": "#fbfbfb",
+    "bg": "#f3f3f3",
+    "bg_soft": "#e2e2e2",
+    "bg1": "#d0d0d0",
+    "bg2": "#bcbcbc",
+    "bg3": "#979797",
+    "bg4": "#7d7d7d",
+    "fg0": "#1e1e1e",
+    "fg": "#323232",
+    "fg2": "#454545",
+    "fg3": "#5b5b5b",
+    "fg4": "#707070",
+    "gray": "#7a7a7a",
+    "accent": {
+      "red": "#cc241d",
+      "green": "#727114",
+      "yellow": "#976311",
+      "blue": "#3e7779",
+      "purple": "#a65379",
+      "aqua": "#4e774f",
+      "orange": "#b64f0c",
+      "teal": "#0e7a73"
+    },
+    "accent_dim": {
+      "red": "#cc241d",
+      "green": "#8d8c18",
+      "yellow": "#b57614",
+      "blue": "#458588",
+      "purple": "#b16286",
+      "aqua": "#609462",
+      "orange": "#d65d0e",
+      "teal": "#0e7a73"
+    }
+  }
+}

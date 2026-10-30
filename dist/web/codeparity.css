@@ -1,0 +1,190 @@
+/*
+ * Codeparity color theme — web (CSS custom properties)
+ * Seed: Gruvbox Dark (medium contrast). WCAG-AA verified text/accent
+ * contrast per theme (see src/check_contrast.py in the source bundle).
+ *
+ * Usage:
+ *   - Light is the default (:root).
+ *   - Dark applies automatically when the OS is in dark mode.
+ *   - Add data-theme="dark" or data-theme="light" on <html> (or any
+ *     ancestor) to force a theme regardless of OS preference.
+ */
+
+:root {
+  --cp-bg: #f3f3f3;
+  --cp-bg-elevated: #fbfbfb;
+  --cp-bg-soft: #e2e2e2;
+  --cp-bg-panel: #d0d0d0;
+  --cp-bg-selection: #bcbcbc;
+  --cp-border: #979797;
+  --cp-border-strong: #7d7d7d;
+
+  --cp-text-strong: #1e1e1e;
+  --cp-text: #323232;
+  --cp-text-soft: #454545;
+  --cp-text-muted: #5b5b5b;
+  --cp-text-subtle: #707070;
+  --cp-comment: #7a7a7a;
+
+  --cp-red: #cc241d;
+  --cp-green: #727114;
+  --cp-yellow: #976311;
+  --cp-blue: #3e7779;
+  --cp-purple: #a65379;
+  --cp-aqua: #4e774f;
+  --cp-orange: #b64f0c;
+  --cp-teal: #0e7a73;
+
+  --cp-red-dim: #cc241d;
+  --cp-green-dim: #8d8c18;
+  --cp-yellow-dim: #b57614;
+  --cp-blue-dim: #458588;
+  --cp-purple-dim: #b16286;
+  --cp-aqua-dim: #609462;
+  --cp-orange-dim: #d65d0e;
+  --cp-teal-dim: #0e7a73;
+
+  /* semantic aliases */
+  --cp-link: var(--cp-teal);
+  --cp-success: var(--cp-green);
+  --cp-warning: var(--cp-yellow);
+  --cp-danger: var(--cp-red);
+  --cp-info: var(--cp-blue);
+  --cp-focus-ring: var(--cp-teal);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --cp-bg: #282828;
+  --cp-bg-elevated: #1f1f1f;
+  --cp-bg-soft: #303030;
+  --cp-bg-panel: #393939;
+  --cp-bg-selection: #4a4a4a;
+  --cp-border: #5d5d5d;
+  --cp-border-strong: #707070;
+
+  --cp-text-strong: #e1e1e1;
+  --cp-text: #cecece;
+  --cp-text-soft: #bbbbbb;
+  --cp-text-muted: #a8a8a8;
+  --cp-text-subtle: #969696;
+  --cp-comment: #838383;
+
+  --cp-red: #fb5744;
+  --cp-green: #b8bb26;
+  --cp-yellow: #fabd2f;
+  --cp-blue: #83a598;
+  --cp-purple: #d3869b;
+  --cp-aqua: #8ec07c;
+  --cp-orange: #fe8019;
+  --cp-teal: #2bb3a3;
+
+  --cp-red-dim: #e02d25;
+  --cp-green-dim: #98971a;
+  --cp-yellow-dim: #d79921;
+  --cp-blue-dim: #458588;
+  --cp-purple-dim: #b16286;
+  --cp-aqua-dim: #689d6a;
+  --cp-orange-dim: #d65d0e;
+  --cp-teal-dim: #1f8a7d;
+
+  /* semantic aliases */
+  --cp-link: var(--cp-teal);
+  --cp-success: var(--cp-green);
+  --cp-warning: var(--cp-yellow);
+  --cp-danger: var(--cp-red);
+  --cp-info: var(--cp-blue);
+  --cp-focus-ring: var(--cp-teal);
+  }
+}
+
+:root[data-theme="dark"] {
+  --cp-bg: #282828;
+  --cp-bg-elevated: #1f1f1f;
+  --cp-bg-soft: #303030;
+  --cp-bg-panel: #393939;
+  --cp-bg-selection: #4a4a4a;
+  --cp-border: #5d5d5d;
+  --cp-border-strong: #707070;
+
+  --cp-text-strong: #e1e1e1;
+  --cp-text: #cecece;
+  --cp-text-soft: #bbbbbb;
+  --cp-text-muted: #a8a8a8;
+  --cp-text-subtle: #969696;
+  --cp-comment: #838383;
+
+  --cp-red: #fb5744;
+  --cp-green: #b8bb26;
+  --cp-yellow: #fabd2f;
+  --cp-blue: #83a598;
+  --cp-purple: #d3869b;
+  --cp-aqua: #8ec07c;
+  --cp-orange: #fe8019;
+  --cp-teal: #2bb3a3;
+
+  --cp-red-dim: #e02d25;
+  --cp-green-dim: #98971a;
+  --cp-yellow-dim: #d79921;
+  --cp-blue-dim: #458588;
+  --cp-purple-dim: #b16286;
+  --cp-aqua-dim: #689d6a;
+  --cp-orange-dim: #d65d0e;
+  --cp-teal-dim: #1f8a7d;
+
+  /* semantic aliases */
+  --cp-link: var(--cp-teal);
+  --cp-success: var(--cp-green);
+  --cp-warning: var(--cp-yellow);
+  --cp-danger: var(--cp-red);
+  --cp-info: var(--cp-blue);
+  --cp-focus-ring: var(--cp-teal);
+}
+
+:root[data-theme="light"] {
+  --cp-bg: #f3f3f3;
+  --cp-bg-elevated: #fbfbfb;
+  --cp-bg-soft: #e2e2e2;
+  --cp-bg-panel: #d0d0d0;
+  --cp-bg-selection: #bcbcbc;
+  --cp-border: #979797;
+  --cp-border-strong: #7d7d7d;
+
+  --cp-text-strong: #1e1e1e;
+  --cp-text: #323232;
+  --cp-text-soft: #454545;
+  --cp-text-muted: #5b5b5b;
+  --cp-text-subtle: #707070;
+  --cp-comment: #7a7a7a;
+
+  --cp-red: #cc241d;
+  --cp-green: #727114;
+  --cp-yellow: #976311;
+  --cp-blue: #3e7779;
+  --cp-purple: #a65379;
+  --cp-aqua: #4e774f;
+  --cp-orange: #b64f0c;
+  --cp-teal: #0e7a73;
+
+  --cp-red-dim: #cc241d;
+  --cp-green-dim: #8d8c18;
+  --cp-yellow-dim: #b57614;
+  --cp-blue-dim: #458588;
+  --cp-purple-dim: #b16286;
+  --cp-aqua-dim: #609462;
+  --cp-orange-dim: #d65d0e;
+  --cp-teal-dim: #0e7a73;
+
+  /* semantic aliases */
+  --cp-link: var(--cp-teal);
+  --cp-success: var(--cp-green);
+  --cp-warning: var(--cp-yellow);
+  --cp-danger: var(--cp-red);
+  --cp-info: var(--cp-blue);
+  --cp-focus-ring: var(--cp-teal);
+}
+
+body {
+  background: var(--cp-bg);
+  color: var(--cp-text);
+}

@@ -1,0 +1,34 @@
+# Codeparity Light — Alacritty color scheme
+# Generated from the Codeparity palette (src/palette.json)
+
+[colors.primary]
+background = "#f3f3f3"
+foreground = "#323232"
+
+[colors.cursor]
+text = "#f3f3f3"
+cursor = "#0e7a73"
+
+[colors.selection]
+text = "#1e1e1e"
+background = "#bcbcbc"
+
+[colors.normal]
+black = "#323232"
+red = "#cc241d"
+green = "#8d8c18"
+yellow = "#b57614"
+blue = "#458588"
+magenta = "#b16286"
+cyan = "#609462"
+white = "#979797"
+
+[colors.bright]
+black = "#7a7a7a"
+red = "#cc241d"
+green = "#727114"
+yellow = "#976311"
+blue = "#3e7779"
+magenta = "#a65379"
+cyan = "#4e774f"
+white = "#fbfbfb"
