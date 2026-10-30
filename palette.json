@@ -1,0 +1,14 @@
+{
+  "name": "CodeParity",
+  "description": "Gruvbox accents on charcoal dark and soft grey light surfaces.",
+  "dark": {
+    "bg0": "#181818", "bg1": "#1e1e1e", "bg2": "#2a2a2a", "bg3": "#3a3a3a",
+    "fg": "#ebdbb2", "fgDim": "#a89984", "red": "#fb4934", "green": "#b8bb26",
+    "yellow": "#fabd2f", "blue": "#83a598", "purple": "#d3869b", "aqua": "#8ec07c", "orange": "#fe8019"
+  },
+  "light": {
+    "bg0": "#e2e4e6", "bg1": "#ebecee", "bg2": "#d8dadc", "bg3": "#c2c6ca",
+    "fg": "#282c34", "fgDim": "#665c54", "red": "#9d0006", "green": "#79740e",
+    "yellow": "#b57614", "blue": "#076678", "purple": "#8f3f71", "aqua": "#427b58", "orange": "#af3a03"
+  }
+}
