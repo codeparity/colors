@@ -9,7 +9,7 @@ CodeParity installer
 Usage:
   ./install.sh [--base-url URL] [--all | --vim | --nvim | --alacritty-dark | --alacritty-light]
 
-Run without options in a terminal for a detected-tools checkbox menu. When
+Run without options in a terminal to confirm detected tools with Y/n prompts. When
 piped through curl, pass --base-url pointing to the hosted codeparity folder:
   curl -fsSL URL/install.sh | bash -s -- --base-url RAW_URL --all
 
@@ -66,51 +66,25 @@ case "$MODE" in
   --alacritty-light) selected_alacritty_light=1 ;;
   menu)
     if [[ ! -r /dev/tty ]]; then
-      echo 'Interactive menu needs a terminal. Use --vim, --nvim, --alacritty-dark, --alacritty-light, or --all.' >&2
+    echo 'Interactive install needs a terminal. Use --vim, --nvim, --alacritty-dark, --alacritty-light, or --all.' >&2
       exit 2
     fi
-    choices=()
-    ((has_vim)) && choices+=(vim)
-    ((has_nvim)) && choices+=(nvim)
-    ((has_alacritty)) && choices+=(alacritty_dark alacritty_light)
-    if ((${#choices[@]} == 0)); then
-      echo 'No supported editor or Alacritty installation detected. You can still select a target explicitly.' >&2
-      choices=(vim nvim alacritty_dark alacritty_light)
-    fi
-    declare -A checked=()
-    for choice in "${choices[@]}"; do checked["$choice"]=0; done
-    ((has_vim)) && checked[vim]=1
-    ((has_nvim)) && checked[nvim]=1
-    ((has_alacritty)) && checked[alacritty_dark]=1
-    echo 'CodeParity install options (enter a number to toggle, i to install, q to quit):' >/dev/tty
-    while :; do
-      for i in "${!choices[@]}"; do
-        choice="${choices[$i]}"; label="$choice"
-        case "$choice" in
-          vim) label='Vim colorscheme' ;;
-          nvim) label='Neovim colorscheme' ;;
-          alacritty_dark) label='Alacritty dark palette' ;;
-          alacritty_light) label='Alacritty light palette' ;;
-        esac
-        mark=' '; ((checked[$choice])) && mark='x'
-        printf '  %d. [%s] %s\n' "$((i+1))" "$mark" "$label" >/dev/tty
-      done
-      printf '> ' >/dev/tty
-      IFS= read -r answer </dev/tty || exit 0
-      case "$answer" in
-        i|I) break ;;
-        q|Q) echo 'Cancelled.' >/dev/tty; exit 0 ;;
-        ''|*[!0-9]*) echo 'Choose a listed number, i, or q.' >/dev/tty ;;
-        *)
-          n=$((answer-1))
-          if ((n >= 0 && n < ${#choices[@]})); then
-            choice="${choices[$n]}"; checked[$choice]=$((1-checked[$choice]))
-          else echo 'Number out of range.' >/dev/tty; fi ;;
-      esac
-    done
-    selected_vim=${checked[vim]:-0}; selected_nvim=${checked[nvim]:-0}
-    selected_alacritty_dark=${checked[alacritty_dark]:-0}
-    selected_alacritty_light=${checked[alacritty_light]:-0}
+    ask_install() {
+      local label="$1" default="$2" answer
+      if ((default)); then
+        printf '%s [Y/n] ' "$label" >/dev/tty
+        IFS= read -r answer </dev/tty || answer=''
+        [[ -z "$answer" || "$answer" =~ ^[Yy]$ ]]
+      else
+        printf '%s [y/N] ' "$label" >/dev/tty
+        IFS= read -r answer </dev/tty || answer=''
+        [[ "$answer" =~ ^[Yy]$ ]]
+      fi
+    }
+    ask_install 'Install Vim colorscheme?' "$has_vim" && selected_vim=1
+    ask_install 'Install Neovim colorscheme?' "$has_nvim" && selected_nvim=1
+    ask_install 'Install Alacritty dark palette?' "$has_alacritty" && selected_alacritty_dark=1
+    ask_install 'Install Alacritty light palette?' 0 && selected_alacritty_light=1
     ;;
 esac
 

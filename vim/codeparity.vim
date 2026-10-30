@@ -1,16 +1,16 @@
-" CodeParity colorscheme: Gruvbox accents on charcoal / soft grey.
+" CodeParity colorscheme: muted Gruvbox accents on soft charcoal / warm light.
 hi clear
 if exists('syntax_on') | syntax reset | endif
 let g:colors_name = 'codeparity'
 
 if &background ==# 'light'
-  let s:bg0='#e2e4e6' | let s:bg1='#ebecee' | let s:bg2='#d8dadc' | let s:bg3='#c2c6ca'
-  let s:fg='#282c34' | let s:dim='#665c54' | let s:red='#9d0006' | let s:green='#79740e'
-  let s:yellow='#b57614' | let s:blue='#076678' | let s:purple='#8f3f71' | let s:aqua='#427b58' | let s:orange='#af3a03'
+  let s:bg0='#efeee9' | let s:bg1='#f5f4ef' | let s:bg2='#e5e3dc' | let s:bg3='#d4d1c8'
+  let s:fg='#343633' | let s:dim='#716d63' | let s:red='#a65d55' | let s:green='#69764a'
+  let s:yellow='#98733c' | let s:blue='#426e78' | let s:purple='#805b76' | let s:aqua='#54745c' | let s:orange='#a35f36'
 else
-  let s:bg0='#181818' | let s:bg1='#1e1e1e' | let s:bg2='#2a2a2a' | let s:bg3='#3a3a3a'
-  let s:fg='#ebdbb2' | let s:dim='#a89984' | let s:red='#fb4934' | let s:green='#b8bb26'
-  let s:yellow='#fabd2f' | let s:blue='#83a598' | let s:purple='#d3869b' | let s:aqua='#8ec07c' | let s:orange='#fe8019'
+  let s:bg0='#202124' | let s:bg1='#282a2d' | let s:bg2='#34363a' | let s:bg3='#484a4e'
+  let s:fg='#d6d3c8' | let s:dim='#a39d90' | let s:red='#e47769' | let s:green='#a9ad68'
+  let s:yellow='#d6b66d' | let s:blue='#83a6a0' | let s:purple='#c08ca3' | let s:aqua='#91ad85' | let s:orange='#d8965f'
 endif
 let s:groups = {
 \ 'Normal': [s:fg,s:bg0], 'NormalFloat': [s:fg,s:bg1], 'CursorLine': ['NONE',s:bg1],

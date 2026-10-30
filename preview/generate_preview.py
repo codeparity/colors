@@ -1,21 +1,94 @@
 #!/usr/bin/env python3
-"""Build a standalone HTML preview from the files in samples/."""
+"""Build a side-by-side light and dark palette preview from palette.json."""
+import json
 from html import escape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-SAMPLES = ROOT / "samples"
-FILES = ["server.py", "app.js", "main.rs", "config.json", "card.html"]
+PALETTE = ROOT.parent / "palette.json"
+TOKENS = json.loads(PALETTE.read_text())
 
-cards = []
-for filename in FILES:
-    source = escape((SAMPLES / filename).read_text())
-    cards.append(f'''<section class="editor"><header><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><b>{filename}</b></header><pre>{source}</pre></section>''')
 
-page = '''<!doctype html>
+def make_theme(name, colors):
+    swatches = "".join(
+        f'<div class="swatch"><span style="background:{value}"></span>'
+        f'<b>{escape(key)}</b><code>{escape(value)}</code></div>'
+        for key, value in colors.items()
+    )
+    return f'''<section class="theme {name}">
+      <header class="theme-head"><div><p class="eyebrow">CODEPARITY / {name.upper()}</p>
+      <h2>{name.title()} mode</h2><p class="muted">A preview of the full {name} palette.</p></div>
+      <span class="mode-pill">{name}</span></header>
+      <div class="workspace"><nav class="rail"><b>CP</b><span class="active">◈</span><span>⌕</span><span>⚙</span></nav>
+      <div class="content"><div class="crumb muted">Workspace <span>/</span> Appearance</div>
+        <div class="panel intro-panel"><p class="eyebrow accent">COLOR &amp; TYPE</p>
+          <h1>A calmer place<br>to focus.</h1>
+          <p class="body-copy">Warm, balanced surfaces and carefully tuned accents make long sessions easier to settle into.</p>
+          <div class="actions"><button class="primary">Apply theme</button><button class="secondary">Learn more</button></div>
+        </div>
+        <div class="cards"><article class="panel small-card"><p class="eyebrow muted">CURRENT THEME</p><h3>CodeParity</h3>
+          <p class="muted">Muted Gruvbox accents</p><div class="mini-swatches"><i></i><i></i><i></i><i></i><i></i></div></article>
+          <article class="panel small-card"><p class="eyebrow muted">STATUS</p><div class="status"><span></span> Ready to focus</div>
+          <p class="muted">Your preferences are up to date.</p><div class="progress"><i></i></div></article>
+        </div>
+        <div class="panel selection"><span class="selection-mark">✓</span><div><b>Selected item</b><p class="muted">Selection and secondary surface colors</p></div><kbd>⌘ K</kbd></div>
+        <div class="terminal"><div class="terminal-head"><span><i></i><i></i><i></i></span><b>~/workspace — preview</b><em>•••</em></div>
+          <pre><span class="term-dim">$</span> cat theme.toml
+<span class="term-key">name</span> = <span class="term-string">"CodeParity"</span>
+<span class="term-key">background</span> = <span class="term-string">"{colors['bg0']}"</span>
+<span class="term-key">foreground</span> = <span class="term-string">"{colors['fg']}"</span>
+<span class="term-key">accent</span> = <span class="term-accent">"{colors['blue']}"</span>
+
+<span class="term-dim"># A softer palette for focused work</span>
+<span class="term-green">✓ Theme loaded successfully</span></pre></div>
+        <div class="palette"><p class="eyebrow muted">PALETTE TOKENS</p><div class="swatches">{swatches}</div></div>
+      </div></div>
+    </section>'''
+
+
+themes = "".join(make_theme(name, colors) for name, colors in TOKENS.items() if name in ("dark", "light"))
+theme_vars = "\n".join(
+    f'.{name}{{' + "".join(f"--{key}:{value};" for key, value in colors.items()) + "}"
+    for name, colors in TOKENS.items() if name in ("dark", "light")
+)
+page = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CodeParity · Source previews</title><style>
-:root{color-scheme:dark;--bg:#181818;--surface:#1e1e1e;--line:#2a2a2a;--fg:#ebdbb2;--dim:#a89984;--blue:#83a598;--green:#b8bb26;--yellow:#fabd2f;--red:#fb4934;--purple:#d3869b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:40px 24px}h1{margin:0;color:var(--blue)}.intro{color:var(--dim);margin:4px 0 28px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:16px}.editor{overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--surface)}header{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#1a1a1a;border-bottom:1px solid var(--line);font:12px ui-monospace,monospace;color:var(--dim)}header b{margin-left:8px;color:var(--fg);font-weight:500} .dot{width:9px;height:9px;border-radius:50%}.red{background:var(--red)}.yellow{background:var(--yellow)}.green{background:var(--green)}pre{margin:0;padding:16px;overflow:auto;color:var(--fg);font:12px/1.75 ui-monospace,SFMono-Regular,monospace;tab-size:2}footer{margin-top:24px;color:var(--dim);font-size:12px}
-</style></head><body><main><h1>CodeParity</h1><p class="intro">Dark palette preview rendered from five sample files.</p><div class="grid">''' + "\n".join(cards) + '''</div><footer>Generated by preview/generate_preview.py · palette: #181818 / #ebdbb2</footer></main></body></html>'''
+<title>CodeParity · Palette preview</title><style>
+*{{box-sizing:border-box}}body{{margin:0;background:#17191c;color:#ece9e1;font:14px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}}
+main{{max-width:1440px;margin:auto;padding:38px 28px 56px}}.page-head{{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:24px}}
+h1{{font-size:28px;line-height:1.1;margin:0 0 8px;letter-spacing:-.04em}}.page-head p{{margin:0;color:#a39d90}}.legend{{color:#a39d90;font-size:12px}}.themes{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}}
+.theme{{--bg0:#202124;--bg1:#282a2d;--bg2:#34363a;--bg3:#484a4e;--fg:#d6d3c8;--fgDim:#a39d90;--red:#e47769;--green:#a9ad68;--yellow:#d6b66d;--blue:#83a6a0;--purple:#c08ca3;--aqua:#91ad85;--orange:#d8965f;background:var(--bg0);color:var(--fg);border:1px solid var(--bg3);border-radius:14px;overflow:hidden;box-shadow:0 16px 40px #0003}}
+.theme-head{{padding:20px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bg2)}}.eyebrow{{font-size:10px;letter-spacing:.12em;font-weight:700;margin:0 0 8px}}.theme-head h2{{font-size:20px;margin:0;letter-spacing:-.03em}}.muted{{color:var(--fgDim)}}.theme-head .muted{{margin:4px 0 0;font-size:12px}}.mode-pill{{border:1px solid var(--bg3);border-radius:99px;padding:5px 10px;color:var(--fgDim);font-size:11px;text-transform:uppercase;letter-spacing:.08em}}
+.workspace{{display:grid;grid-template-columns:46px 1fr;min-height:640px}}.rail{{background:var(--bg1);border-right:1px solid var(--bg2);display:flex;align-items:center;flex-direction:column;gap:18px;padding:16px 0;color:var(--fgDim)}}.rail b{{font-size:12px;color:var(--blue);margin-bottom:10px}}.rail span{{height:28px;width:28px;display:grid;place-items:center;border-radius:7px}}.rail .active{{background:var(--bg3);color:var(--yellow)}}.content{{padding:18px;min-width:0}}.crumb{{font-size:11px;margin-bottom:15px}}.crumb span{{padding:0 6px;color:var(--bg3)}}.panel{{background:var(--bg1);border:1px solid var(--bg2);border-radius:10px}}
+.intro-panel{{padding:20px 21px 18px;background:linear-gradient(135deg,var(--bg1),var(--bg0))}}.accent{{color:var(--aqua)}}.intro-panel h1{{font-size:30px;line-height:1.05;letter-spacing:-.045em;margin:0 0 12px}}.body-copy{{font-size:12px;line-height:1.65;color:var(--fgDim);max-width:330px;margin:0 0 16px}}.actions{{display:flex;gap:8px}}button{{border:0;border-radius:6px;padding:8px 11px;font:600 11px system-ui}}.primary{{background:var(--blue);color:var(--bg0)}}.secondary{{background:var(--bg2);color:var(--fg)}}
+.cards{{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}}.small-card{{padding:13px;min-height:106px}}.small-card h3{{font-size:15px;margin:0 0 2px}}.small-card p{{font-size:10px;margin:0 0 10px}}.mini-swatches{{display:flex;gap:5px}}.mini-swatches i{{width:17px;height:17px;border-radius:50%;background:var(--red)}}.mini-swatches i:nth-child(2){{background:var(--green)}}.mini-swatches i:nth-child(3){{background:var(--yellow)}}.mini-swatches i:nth-child(4){{background:var(--blue)}}.mini-swatches i:nth-child(5){{background:var(--purple)}}.status{{font-size:11px;display:flex;gap:6px;align-items:center;margin:2px 0 5px}}.status span{{width:7px;height:7px;border-radius:50%;background:var(--green)}}.progress{{height:4px;background:var(--bg3);border-radius:9px;overflow:hidden}}.progress i{{display:block;width:72%;height:100%;background:var(--green);border-radius:9px}}
+.selection{{display:flex;align-items:center;gap:10px;padding:10px 12px;margin-top:10px;background:color-mix(in srgb,var(--blue) 13%,var(--bg1));border-color:color-mix(in srgb,var(--blue) 32%,var(--bg2))}}.selection-mark{{height:21px;width:21px;display:grid;place-items:center;border-radius:5px;background:var(--blue);color:var(--bg0);font-size:12px}}.selection b{{font-size:11px}}.selection p{{font-size:10px;margin:1px 0 0}}kbd{{margin-left:auto;color:var(--fgDim);border:1px solid var(--bg3);border-radius:4px;padding:2px 5px;font:10px ui-monospace,monospace}}
+.terminal{{margin-top:11px;border:1px solid var(--bg3);border-radius:9px;overflow:hidden;background:var(--bg0)}}.terminal-head{{height:30px;background:var(--bg1);border-bottom:1px solid var(--bg2);display:flex;align-items:center;justify-content:space-between;padding:0 10px;color:var(--fgDim);font:9px ui-monospace,monospace}}.terminal-head span{{display:flex;gap:4px}}.terminal-head i{{width:6px;height:6px;border-radius:50%;background:var(--red)}}.terminal-head i:nth-child(2){{background:var(--yellow)}}.terminal-head i:nth-child(3){{background:var(--green)}}.terminal-head em{{font-style:normal}}.terminal pre{{margin:0;padding:11px 12px;color:var(--fg);font:10px/1.75 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap}}.term-dim{{color:var(--fgDim)}}.term-key{{color:var(--blue)}}.term-string{{color:var(--green)}}.term-accent{{color:var(--purple)}}.term-green{{color:var(--green)}}
+.palette{{padding:15px 2px 2px}}.swatches{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}}.swatch{{display:grid;grid-template-columns:19px 1fr;grid-template-rows:auto auto;column-gap:7px;align-items:center;font-size:10px;min-width:0}}.swatch span{{grid-row:span 2;height:19px;width:19px;border-radius:5px;border:1px solid color-mix(in srgb,var(--fg) 15%,transparent)}}.swatch b{{font-weight:550;overflow:hidden;text-overflow:ellipsis}}.swatch code{{font:9px ui-monospace,monospace;color:var(--fgDim)}}
+{theme_vars}
+@media(max-width:900px){{.themes{{grid-template-columns:1fr}}.workspace{{min-height:0}}}}@media(max-width:480px){{main{{padding:24px 12px}}.page-head{{display:block}}.legend{{margin-top:10px}}.content{{padding:12px}}.swatches{{grid-template-columns:repeat(2,minmax(0,1fr))}}}}
+.theme[hidden]{{display:none!important}}.theme-switch{{display:flex;align-items:center;justify-content:flex-end;gap:9px;color:#a39d90;font-size:12px}}.switch{{position:relative;width:42px;height:24px;border:1px solid #484a4e;border-radius:99px;background:#282a2d;padding:2px;cursor:pointer}}.switch::after{{content:"";display:block;width:18px;height:18px;border-radius:50%;background:#d6d3c8;transition:transform .2s}}.switch[aria-checked="true"]{{background:#426e78;border-color:#426e78}}.switch[aria-checked="true"]::after{{transform:translateX(18px);background:#efeee9}}.switch:focus-visible{{outline:2px solid #83a6a0;outline-offset:3px}}.mode-choices{{display:flex;justify-content:flex-end;gap:5px;margin-top:8px}}.mode-choices[hidden]{{display:none}}.mode-choices button{{background:#282a2d;color:#a39d90;padding:5px 9px}}.mode-choices button[aria-pressed="true"]{{background:#426e78;color:#fff}}
+</style></head><body><main><header class="page-head"><div><h1>CodeParity color preview</h1><p>Compare both modes in the same interface.</p></div><div><label class="theme-switch"><span>Side by side</span><button class="switch" id="modeSwitch" role="switch" aria-checked="false" aria-label="Toggle single mode preview"></button><span>Single mode</span></label><div class="mode-choices" id="modeChoices" hidden><button type="button" data-mode="dark" aria-pressed="true">Dark</button><button type="button" data-mode="light" aria-pressed="false">Light</button></div></div></header><div class="themes">{themes}</div></main><script>
+const toggle=document.getElementById('modeSwitch');
+const choices=document.getElementById('modeChoices');
+const cards=[...document.querySelectorAll('.theme')];
+let selectedMode='dark';
+function updateView(){{
+  const single=toggle.getAttribute('aria-checked')==='true';
+  cards.forEach(card=>{{card.hidden=single&&!card.classList.contains(selectedMode)}});
+  choices.hidden=!single;
+}}
+toggle.addEventListener('click',()=>{{
+  const single=toggle.getAttribute('aria-checked')!=='true';
+  toggle.setAttribute('aria-checked',String(single));
+  updateView();
+}});
+choices.addEventListener('click',event=>{{
+  const choice=event.target.closest('[data-mode]');
+  if(!choice)return;
+  selectedMode=choice.dataset.mode;
+  choices.querySelectorAll('[data-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button===choice)));
+  updateView();
+}});
+</script></body></html>'''
 (ROOT / "index.html").write_text(page)

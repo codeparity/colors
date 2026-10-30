@@ -1,14 +1,14 @@
 {
   "name": "CodeParity",
-  "description": "Gruvbox accents on charcoal dark and soft grey light surfaces.",
+  "description": "Muted Gruvbox accents on soft charcoal and warm light surfaces.",
   "dark": {
-    "bg0": "#181818", "bg1": "#1e1e1e", "bg2": "#2a2a2a", "bg3": "#3a3a3a",
-    "fg": "#ebdbb2", "fgDim": "#a89984", "red": "#fb4934", "green": "#b8bb26",
-    "yellow": "#fabd2f", "blue": "#83a598", "purple": "#d3869b", "aqua": "#8ec07c", "orange": "#fe8019"
+    "bg0": "#202124", "bg1": "#282a2d", "bg2": "#34363a", "bg3": "#484a4e",
+    "fg": "#d6d3c8", "fgDim": "#a39d90", "red": "#e47769", "green": "#a9ad68",
+    "yellow": "#d6b66d", "blue": "#83a6a0", "purple": "#c08ca3", "aqua": "#91ad85", "orange": "#d8965f"
   },
   "light": {
-    "bg0": "#e2e4e6", "bg1": "#ebecee", "bg2": "#d8dadc", "bg3": "#c2c6ca",
-    "fg": "#282c34", "fgDim": "#665c54", "red": "#9d0006", "green": "#79740e",
-    "yellow": "#b57614", "blue": "#076678", "purple": "#8f3f71", "aqua": "#427b58", "orange": "#af3a03"
+    "bg0": "#efeee9", "bg1": "#f5f4ef", "bg2": "#e5e3dc", "bg3": "#d4d1c8",
+    "fg": "#343633", "fgDim": "#716d63", "red": "#a65d55", "green": "#69764a",
+    "yellow": "#98733c", "blue": "#426e78", "purple": "#805b76", "aqua": "#54745c", "orange": "#a35f36"
   }
 }

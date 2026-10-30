@@ -1,6 +1,6 @@
 # CodeParity theme artifacts
 
-The original single-file concept is now split into reusable palette and application artifacts. The standalone [preview](preview/index.html) is generated from the five files in `preview/samples/` (Python, JavaScript, Rust, JSON, and HTML).
+The original single-file concept is now split into reusable palette and application artifacts. The standalone [preview](preview/index.html) shows the dark and light palettes side by side in a sample interface and is generated from `palette.json`.
 
 ## Files
 
@@ -8,8 +8,7 @@ The original single-file concept is now split into reusable palette and applicat
 - `vim/codeparity.vim` — Vim and Neovim colorscheme, selected by `background`.
 - `alacritty/codeparity-dark.toml` and `alacritty/codeparity-light.toml` — terminal palettes.
 - `vscode/codeparity-color-theme.json` — VS Code dark workbench and syntax colors.
-- `preview/samples/` — source files used to populate the preview.
-- `preview/generate_preview.py` — rebuilds `preview/index.html` from those samples.
+- `preview/generate_preview.py` — rebuilds the side-by-side preview from `palette.json`.
 
 ## Use
 
@@ -20,20 +19,18 @@ For Alacritty, merge the desired TOML palette into your configuration. For VS Co
 Regenerate the preview after changing a sample with:
 
 ```sh
-python3 codeparity/preview/generate_preview.py
+python3 preview/generate_preview.py
 ```
-
-The existing `codeparity_theme_showcase.html` remains the interactive palette and UI showcase.
 
 ## Install
 
-Run `./codeparity/install.sh` from this checkout. It detects Vim, Neovim, and Alacritty, then opens a checkbox menu with detected choices preselected. Enter a number to toggle an option, `i` to install, or `q` to quit. The Alacritty palette is copied into its themes directory; the script prints the import line to enable it in your config.
+Run `./install.sh` from this checkout. It detects Vim, Neovim, and Alacritty, then asks whether to install each option with standard `[Y/n]` prompts. Detected tools default to yes; Alacritty's dark palette defaults to yes and its light palette defaults to no. The Alacritty palette is copied into its themes directory; the script prints the import line to enable it in your config.
 
-For a hosted checkout, pipe the script into Bash and point it at the raw `codeparity/` folder (the URL below is a placeholder for the repository's published raw URL):
+For a hosted checkout, pipe the script into Bash and point it at the raw folder containing `palette.json` and the `vim/` and `alacritty/` directories (the URL below is a placeholder for the repository's published raw URL):
 
 ```sh
-curl -fsSL https://RAW-HOST/OWNER/REPO/BRANCH/codeparity/install.sh \\
-  | bash -s -- --base-url https://RAW-HOST/OWNER/REPO/BRANCH/codeparity
+curl -fsSL https://RAW-HOST/OWNER/REPO/BRANCH/install.sh \\
+  | bash -s -- --base-url https://RAW-HOST/OWNER/REPO/BRANCH
 ```
 
 Noninteractive options are `--vim`, `--nvim`, `--alacritty-dark`, `--alacritty-light`, and `--all` (all detected tools). `--help` lists usage.
