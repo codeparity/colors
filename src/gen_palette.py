@@ -2,7 +2,7 @@
 """
 Codeparity color theme — palette generator.
 
-Builds Codeparity Dark (seeded from Gruvbox Dark) and Codeparity Light
+Builds Codeparity Dark and Codeparity Light
 (a fresh, custom-reinterpreted companion that keeps the same hue identity
 per role but is NOT a literal lightness-inversion of the dark palette).
 
@@ -56,7 +56,7 @@ def hsl_to_hex(hh, ss, ll):
 
 
 def desaturate(hexcolor, sat=0.0, hue=0.0):
-    """Strip the warm Gruvbox hue tint from a neutral, keeping its
+    """Strip the warm hue tint from a neutral, keeping its
     lightness (so the ramp spacing is unchanged) but setting saturation
     to `sat` (0 = true grey) and hue to `hue`."""
     hh, ss, ll = hex_to_hsl(hexcolor)
@@ -100,9 +100,9 @@ def adjust_for_contrast(seed_hex, bg_hex, target, prefer="auto", sat_scale=1.0):
 
 
 # ---------------------------------------------------------------------------
-# Gruvbox Dark seed (medium contrast, upstream reference values)
+# SeedColors Dark seed (medium contrast, upstream reference values)
 # ---------------------------------------------------------------------------
-GRUVBOX_DARK = {
+SeedColors_DARK = {
     "bg0_h": "#1d2021", "bg0": "#282828", "bg0_s": "#32302f",
     "bg1": "#3c3836", "bg2": "#504945", "bg3": "#665c54", "bg4": "#7c6f64",
     "fg0": "#fbf1c7", "fg1": "#ebdbb2", "fg2": "#d5c4a1", "fg3": "#bdae93", "fg4": "#a89984",
@@ -117,12 +117,12 @@ GRUVBOX_DARK = {
 }
 
 # ---------------------------------------------------------------------------
-# DARK — Codeparity Dark. Neutrals inherited from the Gruvbox seed as-is
+# DARK — Codeparity Dark. Neutrals inherited from the SeedColors seed as-is
 # (that's the "seed" the user asked for); accents nudged slightly toward a
 # cooler, more saturated register for a distinct brand feel, then contrast-
 # verified at AA against bg0.
 # ---------------------------------------------------------------------------
-# Neutral style: Gruvbox's stock ramp is warm (hue ~30-40 degrees, desatur-
+# Neutral style: SeedColors's stock ramp is warm (hue ~30-40 degrees, desatur-
 # ated toward brown). Codeparity uses true greys instead — same lightness
 # steps (so the ramp spacing/contrast relationships carry over), hue and
 # saturation stripped to 0.
@@ -130,46 +130,46 @@ NEUTRAL_SAT = 0.0
 NEUTRAL_HUE = 0.0
 
 dark = {
-    "bg0_h": desaturate(GRUVBOX_DARK["bg0_h"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "bg": desaturate(GRUVBOX_DARK["bg0"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "bg_soft": desaturate(GRUVBOX_DARK["bg0_s"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "bg1": desaturate(GRUVBOX_DARK["bg1"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "bg2": desaturate(GRUVBOX_DARK["bg2"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "bg3": desaturate(GRUVBOX_DARK["bg3"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "bg4": desaturate(GRUVBOX_DARK["bg4"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "fg0": desaturate(GRUVBOX_DARK["fg0"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "fg": desaturate(GRUVBOX_DARK["fg1"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "fg2": desaturate(GRUVBOX_DARK["fg2"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "fg3": desaturate(GRUVBOX_DARK["fg3"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "fg4": desaturate(GRUVBOX_DARK["fg4"], NEUTRAL_SAT, NEUTRAL_HUE),
-    "gray": desaturate(GRUVBOX_DARK["gray"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "bg0_h": desaturate(SeedColors_DARK["bg0_h"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "bg": desaturate(SeedColors_DARK["bg0"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "bg_soft": desaturate(SeedColors_DARK["bg0_s"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "bg1": desaturate(SeedColors_DARK["bg1"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "bg2": desaturate(SeedColors_DARK["bg2"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "bg3": desaturate(SeedColors_DARK["bg3"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "bg4": desaturate(SeedColors_DARK["bg4"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "fg0": desaturate(SeedColors_DARK["fg0"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "fg": desaturate(SeedColors_DARK["fg1"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "fg2": desaturate(SeedColors_DARK["fg2"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "fg3": desaturate(SeedColors_DARK["fg3"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "fg4": desaturate(SeedColors_DARK["fg4"], NEUTRAL_SAT, NEUTRAL_HUE),
+    "gray": desaturate(SeedColors_DARK["gray"], NEUTRAL_SAT, NEUTRAL_HUE),
 }
 dark_bg = dark["bg"]
 
 # Signature brand accent: a cyan-leaning teal ("parity teal"), not present
-# in stock Gruvbox — used for links/focus rings to give Codeparity its own
-# identity on top of the Gruvbox-seeded neutrals.
+# in stock SeedColors — used for links/focus rings to give Codeparity its own
+# identity on top of the SeedColors-seeded neutrals.
 PARITY_TEAL_SEED_DARK = "#2bb3a3"
 PARITY_TEAL_SEED_LIGHT = "#0e7a73"
 
 dark_accent_seeds = {
-    "red": GRUVBOX_DARK["red_bright"],
-    "green": GRUVBOX_DARK["green_bright"],
-    "yellow": GRUVBOX_DARK["yellow_bright"],
-    "blue": GRUVBOX_DARK["blue_bright"],
-    "purple": GRUVBOX_DARK["purple_bright"],
-    "aqua": GRUVBOX_DARK["aqua_bright"],
-    "orange": GRUVBOX_DARK["orange_bright"],
+    "red": SeedColors_DARK["red_bright"],
+    "green": SeedColors_DARK["green_bright"],
+    "yellow": SeedColors_DARK["yellow_bright"],
+    "blue": SeedColors_DARK["blue_bright"],
+    "purple": SeedColors_DARK["purple_bright"],
+    "aqua": SeedColors_DARK["aqua_bright"],
+    "orange": SeedColors_DARK["orange_bright"],
     "teal": PARITY_TEAL_SEED_DARK,
 }
 dark_accent_dim_seeds = {
-    "red": GRUVBOX_DARK["red"],
-    "green": GRUVBOX_DARK["green"],
-    "yellow": GRUVBOX_DARK["yellow"],
-    "blue": GRUVBOX_DARK["blue"],
-    "purple": GRUVBOX_DARK["purple"],
-    "aqua": GRUVBOX_DARK["aqua"],
-    "orange": GRUVBOX_DARK["orange"],
+    "red": SeedColors_DARK["red"],
+    "green": SeedColors_DARK["green"],
+    "yellow": SeedColors_DARK["yellow"],
+    "blue": SeedColors_DARK["blue"],
+    "purple": SeedColors_DARK["purple"],
+    "aqua": SeedColors_DARK["aqua"],
+    "orange": SeedColors_DARK["orange"],
     "teal": "#1f8a7d",
 }
 
@@ -198,13 +198,13 @@ light = {k: desaturate(v, NEUTRAL_SAT, NEUTRAL_HUE) for k, v in _light_warm.item
 light_bg = light["bg"]
 
 light_accent_seeds = {
-    "red": GRUVBOX_DARK["red"],
-    "green": GRUVBOX_DARK["green"],
+    "red": SeedColors_DARK["red"],
+    "green": SeedColors_DARK["green"],
     "yellow": "#b57614",
-    "blue": GRUVBOX_DARK["blue"],
-    "purple": GRUVBOX_DARK["purple"],
-    "aqua": GRUVBOX_DARK["aqua"],
-    "orange": GRUVBOX_DARK["orange"],
+    "blue": SeedColors_DARK["blue"],
+    "purple": SeedColors_DARK["purple"],
+    "aqua": SeedColors_DARK["aqua"],
+    "orange": SeedColors_DARK["orange"],
     "teal": PARITY_TEAL_SEED_LIGHT,
 }
 light_accent_dim_seeds = dict(light_accent_seeds)  # same hues, lighter target
@@ -219,7 +219,7 @@ for name, seed in light_accent_dim_seeds.items():
 palette = {
     "meta": {
         "name": "Codeparity",
-        "seed": "Gruvbox Dark (medium contrast)",
+        "seed": "SeedColors Dark (medium contrast)",
         "generated_by": "src/gen_palette.py",
     },
     "dark": dark,

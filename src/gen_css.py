@@ -59,7 +59,7 @@ def block(mode):
 
 css = f"""/*
  * Codeparity color theme — web (CSS custom properties)
- * Seed: Gruvbox Dark (medium contrast). WCAG-AA verified text/accent
+ * Seed: SeedColors Dark (medium contrast). WCAG-AA verified text/accent
  * contrast per theme (see src/check_contrast.py in the source bundle).
  *
  * Usage:

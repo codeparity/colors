@@ -1,12 +1,13 @@
 # Codeparity color theme
 
-A dark/light terminal + web theme seeded from Gruvbox Dark.
-
-- **Dark** keeps Gruvbox Dark's neutral background/border ramp as-is;
+A dark/light terminal + web theme for codeparity artifacts.
+2 variants.
+- **Dark** 
   accents are nudged slightly cooler/more saturated and a new "teal" brand
   accent is added (used for links/focus/cursor), then every text and
   accent token is re-verified for WCAG AA contrast.
-- **Light** is a custom-built companion (warm paper neutrals, not an
+- **Light** 
+  is a custom-built companion (warm paper neutrals, not an
   inversion of dark) matched to the same hue identity per role, also
   WCAG AA–verified.
 

@@ -2,7 +2,7 @@
 
 Format-agnostic reference palette for porting Codeparity to any
 terminal emulator, TUI library, or syntax-highlighting scheme.
-Seed: Gruvbox Dark (medium contrast). All text/accent colors are
+All text/accent colors are
 WCAG-AA verified against their background (see `src/check_contrast.py`).
 
 ## Codeparity Dark

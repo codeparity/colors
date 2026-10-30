@@ -156,7 +156,7 @@ def spec_md():
              "",
              "Format-agnostic reference palette for porting Codeparity to any",
              "terminal emulator, TUI library, or syntax-highlighting scheme.",
-             "Seed: Gruvbox Dark (medium contrast). All text/accent colors are",
+             "Seed: SeedColors Dark (medium contrast). All text/accent colors are",
              "WCAG-AA verified against their background (see `src/check_contrast.py`).",
              ""]
     for mode in ("dark", "light"):

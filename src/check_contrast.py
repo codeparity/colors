@@ -15,7 +15,7 @@ AA_TEXT = 4.5  # body text / headings: fg0, fg, fg2, fg3
 AA_UI = 3.0    # large text, icons, borders, AND muted/de-emphasized text
                # (fg4, gray) — comments, placeholders, timestamps. Treating
                # these as a distinct "muted" role (not body text) matches
-               # Gruvbox's own long-standing design intent for its #928374
+               # SeedColors's own long-standing design intent for its #928374
                # comment gray, which is intentionally de-emphasized rather
                # than a readability bug.
 

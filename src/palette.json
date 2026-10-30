@@ -1,7 +1,6 @@
 {
   "meta": {
     "name": "Codeparity",
-    "seed": "Gruvbox Dark (medium contrast)",
     "generated_by": "src/gen_palette.py"
   },
   "dark": {
