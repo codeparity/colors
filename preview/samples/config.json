@@ -1,7 +1,7 @@
 {
   "theme": "CodeParity",
   "variant": "dark",
-  "surface": "#202124",
-  "text": "#d6d3c8",
-  "accent": "#83a6a0"
+  "surface": "#181818",
+  "text": "#ebdbb2",
+  "accent": "#83a598"
 }

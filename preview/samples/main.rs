@@ -5,6 +5,6 @@ struct Theme {
 }
 
 fn main() {
-    let theme = Theme { name: "CodeParity", background: "#202124" };
+    let theme = Theme { name: "CodeParity", background: "#181818" };
     println!("{} on {}", theme.name, theme.background);
 }

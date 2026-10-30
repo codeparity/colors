@@ -3,8 +3,8 @@ from dataclasses import dataclass
 @dataclass
 class Theme:
     name: str = "CodeParity"
-    background: str = "#202124"
-    foreground: str = "#d6d3c8"
+    background: str = "#181818"
+    foreground: str = "#ebdbb2"
 
     def describe(self) -> str:
         return f"{self.name}: {self.background}"
